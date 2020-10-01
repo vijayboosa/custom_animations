@@ -34,6 +34,9 @@ class _AnimationContrallerExampleState extends State<AnimationContrallerExample>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
+  Tween<double> _widthTween = Tween<double>(begin: 200.0, end: 400.0);
+  Animatable<double> _curedTween = Tween<double>(begin: 200.0, end: 400.0)
+      .chain(CurveTween(curve: Curves.easeOut));
   double _width = 0.0;
 
   @override
@@ -41,15 +44,22 @@ class _AnimationContrallerExampleState extends State<AnimationContrallerExample>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 2),
     );
     _controller.addListener(() {
-      print(_controller.value);
-      _setWidth(_controller.value * 200);
+      // print(_controller.value);
+      setState(() {});
+      // _setWidth(_controller.value * 200);
     });
-    _controller.repeat(
-        reverse: true); //to start the animation use _controller.forward
-    print('Hello');
+    _controller.addStatusListener((status) {
+      print(status);
+      if (status == AnimationStatus.completed) {
+        _controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        _controller.forward();
+      }
+    });
+    _controller.forward(); //to start the animation use _controller.forward
   }
 
   void _setWidth(double wi) {
@@ -60,26 +70,29 @@ class _AnimationContrallerExampleState extends State<AnimationContrallerExample>
 
   @override
   Widget build(BuildContext context) {
-    print('called build function');
     return Column(
       children: [
         Row(
           children: [
             Container(
-              width: _width,
+              width: _curedTween.evaluate(_controller),
               height: 200.0,
               color: Colors.green,
-            )
+            ),
           ],
         ),
         Row(
           children: [
             OutlineButton(
-              onPressed: () {},
+              onPressed: () {
+                _controller.forward();
+              },
               child: Text('loop'),
             ),
             OutlineButton(
-              onPressed: () {},
+              onPressed: () {
+                _controller.stop();
+              },
               child: Text('stop'),
             ),
           ],
