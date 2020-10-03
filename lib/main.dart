@@ -1,3 +1,7 @@
+import 'package:custom_animations/screens/align_transition.dart';
+import 'package:custom_animations/screens/multiple_animation.dart';
+import 'package:custom_animations/screens/scale_animation.dart';
+import 'package:custom_animations/screens/second_align_animation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +19,16 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        body: AnimationContrallerExample(),
+        body: SecondAlignAnimationWidget(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              AlignAnimationWidget(),
+              MultipleAniamtionWidget(),
+              ScaleAnimationWidget(),
+            ],
+          ),
+        ),
         appBar: AppBar(
           title: Text('Custom Animation'),
         ),
