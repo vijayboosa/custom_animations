@@ -1,4 +1,5 @@
 import 'package:custom_animations/screens/align_transition.dart';
+import 'package:custom_animations/screens/bottom_left_animation.dart';
 import 'package:custom_animations/screens/multiple_animation.dart';
 import 'package:custom_animations/screens/scale_animation.dart';
 import 'package:custom_animations/screens/second_align_animation.dart';
@@ -19,16 +20,8 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        body: SecondAlignAnimationWidget(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              AlignAnimationWidget(),
-              MultipleAniamtionWidget(),
-              ScaleAnimationWidget(),
-            ],
-          ),
-        ),
+        backgroundColor: Colors.white,
+        body: BottomLeftAnimation(),
         appBar: AppBar(
           title: Text('Custom Animation'),
         ),

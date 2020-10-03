@@ -24,7 +24,7 @@ class _SecondAlignAnimationWidgetState extends State<SecondAlignAnimationWidget>
     );
     _animation = Tween<Offset>(
       begin: Offset(0, 1),
-      end: Offset(0, -1),
+      end: Offset(0, 0),
     ).animate(_animationController);
     _animationController.forward();
   }
